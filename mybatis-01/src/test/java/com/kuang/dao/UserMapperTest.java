@@ -5,7 +5,9 @@ import com.kuang.utils.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserMapperTest {
 
@@ -33,12 +35,39 @@ public class UserMapperTest {
         sqlSession.close();
     }
 
+    @Test
+    public void getUserLike(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> user = mapper.getUserLike("%A%");
+
+        System.out.println(user);
+
+        sqlSession.close();
+    }
+
 
     @Test
     public void addUser(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         int res = mapper.addUser(new User(3, "cindy", "123232342"));
+        if (res > 0){
+            System.out.println("insert success");
+            sqlSession.commit();
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void addUser2(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", "3");
+        map.put("userName", "Cindy");
+        map.put("userPwd", "asdf");
+        int res = mapper.addUser2(map);
         if (res > 0){
             System.out.println("insert success");
             sqlSession.commit();
