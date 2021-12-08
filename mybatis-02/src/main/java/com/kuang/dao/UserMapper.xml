@@ -9,7 +9,7 @@
 <!--resultType是sql-->
 <mapper namespace="com.kuang.dao.UserMapper">
 
-    <select id="getUserList" resultType="com.kuang.pojo.User">
+    <select id="getUserList" resultType="User">
       select * from mybatis.user
     </select>
 
