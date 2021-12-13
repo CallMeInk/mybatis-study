@@ -13,9 +13,9 @@
     </properties>
 
     <!--可以给实体类起别名-->
-    <!--<typeAliases>-->
-        <!--<typeAlias type="com.User" alias="User"/>-->
-    <!--</typeAliases>-->
+    <typeAliases>
+        <typeAlias type="com.kuang.pojo.User" alias="User"/>
+    </typeAliases>
 
     <environments default="development">
         <environment id="development">

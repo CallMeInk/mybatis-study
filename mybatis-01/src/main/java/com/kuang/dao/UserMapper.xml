@@ -7,30 +7,30 @@
 <!--namespace 绑定一个指定的dao/mapper接口-->
 <!--id就是 namespace中mapper类里的方法名-->
 <!--resultType是sql-->
-<mapper namespace="com.kuang.dao.UserMapper">
+<mapper namespace="com.UserMapper">
 
-    <select id="getUserList" resultType="com.kuang.pojo.User">
+    <select id="getUserList" resultType="com.User">
       select * from mybatis.user
     </select>
 
-    <select id="getUserLike" resultType="com.kuang.pojo.User">
+    <select id="getUserLike" resultType="com.User">
       select * from mybatis.user where name like #{value}
     </select>
 
-    <select id="getUserById" parameterType="int" resultType="com.kuang.pojo.User">
+    <select id="getUserById" parameterType="int" resultType="com.User">
       select * from mybatis.user where id = #{id}
     </select>
 
-    <insert id="addUser" parameterType="com.kuang.pojo.User">
-        insert into mybatis.user (id, name, pwd) values (#{id}, #{name}, #{pwd})
+    <insert id="addUser" parameterType="com.User">
+        insert into mybatis.user (id, name, password) values (#{id}, #{name}, #{password})
     </insert>
 
     <insert id="addUser2" parameterType="map">
-        insert into mybatis.user (id, name, pwd) values (#{userId}, #{userName}, #{userPwd})
+        insert into mybatis.user (id, name, password) values (#{userId}, #{userName}, #{userPwd})
     </insert>
 
-    <update id="updateUser" parameterType="com.kuang.pojo.User">
-        update mybatis.user set name = #{name}, pwd = #{pwd} where id = #{id}
+    <update id="updateUser" parameterType="com.User">
+        update mybatis.user set name = #{name}, password = #{password} where id = #{id}
     </update>
 
     <delete id="deleteUser" parameterType="int">
