@@ -51,7 +51,48 @@ public class MyTest {
             System.out.println(blog);
         }
         sqlSession.close();
-
     }
+
+    @Test
+    public void queryBlogWhereTest(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("title", "title1");
+        List<Blog> blogs = mapper.queryBlogWhere(map);
+        for (Blog blog : blogs) {
+            System.out.println(blog);
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void queryBlogChooseTest(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("author", "author2");
+        List<Blog> blogs = mapper.queryBlogChoose(map);
+        for (Blog blog : blogs) {
+            System.out.println(blog);
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void updateBlogTest(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        map.put("id", "c4a6819b2a4f4adf92e3a09cfdbe031d");
+        map.put("title", "title change");
+        mapper.updateBlog(map);
+        sqlSession.close();
+    }
+
 
 }
