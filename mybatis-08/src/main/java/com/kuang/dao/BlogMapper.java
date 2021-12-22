@@ -18,4 +18,6 @@ public interface BlogMapper {
 
     List<Blog> queryBlogChoose(Map map);
 
+    List<Blog> queryBlogForeach(Map map);
+
 }

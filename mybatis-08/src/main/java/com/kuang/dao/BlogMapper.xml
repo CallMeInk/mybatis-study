@@ -25,16 +25,8 @@
 
     <!--使用where标签-->
     <select id="queryBlogWhere" parameterType="map" resultType="com.kuang.pojo.Blog">
-
         select * from blog
-        <where>
-            <if test="title != null">
-                and title=#{title}
-            </if>
-            <if test="author != null">
-                and author=#{author}
-            </if>
-        </where>
+        <include refid="queryCondition"/>
     </select>
 
     <select id="queryBlogChoose" parameterType="map" resultType="com.kuang.pojo.Blog">
@@ -66,5 +58,28 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="queryBlogForeach" parameterType="map" resultType="com.kuang.pojo.Blog">
+
+        select * from blog
+        <where>
+            <foreach collection="ids" open="(" close=")" separator="or" item="id">
+                id = #{id}
+            </foreach>
+        </where>
+
+    </select>
+
+
+    <sql id="queryCondition">
+        <where>
+            <if test="title != null">
+                and title = #{title}
+            </if>
+            <if test="author != null">
+                and author = #{author}
+            </if>
+        </where>
+    </sql>
 
 </mapper>

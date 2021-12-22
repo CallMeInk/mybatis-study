@@ -5,9 +5,7 @@ import com.kuang.utils.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class MyTest {
 
@@ -59,7 +57,7 @@ public class MyTest {
         BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
 
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("title", "title1");
+        map.put("title", "title2");
         List<Blog> blogs = mapper.queryBlogWhere(map);
         for (Blog blog : blogs) {
             System.out.println(blog);
@@ -91,6 +89,28 @@ public class MyTest {
         map.put("id", "c4a6819b2a4f4adf92e3a09cfdbe031d");
         map.put("title", "title change");
         mapper.updateBlog(map);
+        sqlSession.close();
+    }
+
+
+    @Test
+    public void queryBlogForEachTest(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        Set<Integer> ids = new HashSet<Integer>();
+        ids.add(1);
+        ids.add(2);
+        ids.add(3);
+
+        map.put("ids", ids);
+//        map.put("title", "title change");
+        List<Blog> blogs = mapper.queryBlogForeach(map);
+        for (Blog blog : blogs) {
+            System.out.println(blog);
+        }
         sqlSession.close();
     }
 
