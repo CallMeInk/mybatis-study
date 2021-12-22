@@ -11,4 +11,16 @@
 
     </insert>
 
+    <select id="queryBlogIF" parameterType="map" resultType="com.kuang.pojo.Blog">
+
+        select * from blog where 1
+        <if test="title != null">
+            and title=#{title}
+        </if>
+        <if test="author != null">
+            and author=#{author}
+        </if>
+
+    </select>
+
 </mapper>

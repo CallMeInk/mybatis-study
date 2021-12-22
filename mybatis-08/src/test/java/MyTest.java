@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class MyTest {
 
@@ -35,6 +37,21 @@ public class MyTest {
         mapper.addBlog(blog);
 
         sqlSession.close();
+    }
+
+    @Test
+    public void queryBlogIFTest(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("title", "title1");
+        List<Blog> blogs = mapper.queryBlogIF(map);
+        for (Blog blog : blogs) {
+            System.out.println(blog);
+        }
+        sqlSession.close();
+
     }
 
 }
